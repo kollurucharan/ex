@@ -1,0 +1,63 @@
+<html>
+<head>
+<title>window function</title>
+</head>
+<body>
+
+<button><a href="#" onclick="goBack()">Go Back</a></button><br>
+
+
+<button><a href="#" onclick="goForward()">Go Forward</a></button><br>
+
+<button><a href="#" onclick="redirectTo('https://nkxgen.com/')">Go to nkxgen</a></button><br>
+
+<button onclick="displayHistory()">Show History</button>
+
+<ul id="historyList"></ul>
+
+
+
+
+<button><a href="#" onclick="reloadPage()">Reload Page</a><button><br>
+
+<script>
+ 
+  function goBack() {
+    window.history.back();
+  }
+
+
+  function goForward() {
+    window.history.forward();
+  }
+
+  function redirectTo(url) {
+    window.location.href = url;
+  }
+
+
+  function reloadPage() {
+    location.reload();
+  }
+
+
+    function displayHistory() {
+    const historyList = document.getElementById('historyList');
+
+
+    historyList.innerHTML = '';
+
+
+    for (let i = 1; i < window.history.length; i++) {
+console.log(i);
+      const historyItem = document.createElement('li');
+      historyItem.textContent = window.history[i];
+
+      historyList.appendChild(historyItem);
+    }
+  }
+  
+</script>
+
+</script>
+</html>

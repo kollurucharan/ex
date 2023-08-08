@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form Validation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Form Validation</h1>
+        <form>
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control" id="name" onblur="validate('name')">
+                <p id="name-error" ''></p>
+            </div>
+            <div class="form-group">
+                <label for="number">Number:</label>
+                <input type="number" class="form-control" id="number" onblur="validate('number')">
+                <p id="number-error"></p>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="text" class="form-control" id="email" onblur="validate('email')">
+                <p id="email-error"></p>
+            </div>
+            <div class="form-group">
+                <label for="fburl">Facebook URL:</label>
+                <input type="text" class="form-control" id="fburl" onblur="validate('fburl')">
+                <p id="fburl-error"></p>
+            </div>
+            <div class="form-group">
+                <label for="aadhar">Aadhar:</label>
+                <input type="text" class="form-control" id="aadhar" onblur="validate('aadhar')">
+                <p id="aadhar-error"></p>
+            </div>
+            <div class="form-group">
+                <label for="dob">Date of Birth:</label>
+                <input type="date" class="form-control" id="dob" onblur="validate('dob')">
+                <p id="dob-error"></p>
+            </div>
+            <div class="form-group">
+                <label for="pwd">Password 1:</label>
+                <input type="password" class="form-control" id="pwd" onblur="validate('pwd')">
+                <p id="pwd-error"></p>
+            </div>
+            <div class="form-group">
+                <label for="pwd2">Password 2:</label>
+                <input type="password" class="form-control" id="pwd2" onblur="validate('pwd2')">
+                <p id="pwd2-error"></p>
+            </div>
+        </form>
+    </div>
+    <script>
+        function validate(field) {
+            var value = document.getElementById(field).value;
+            var errorElement = document.getElementById(field + '-error');
+            errorElement.textContent = '';
+
+            if (field === 'name') {
+                if (value.trim() === '') {
+                    errorElement.textContent = 'Please enter name';
+                }
+            } else if (field === 'number') {
+                if (value === '' || isNaN(value) || value.length !== 10) {
+                    errorElement.textContent = 'Please enter a valid 10-digit number';
+                }
+            } else if (field === 'email') {
+                var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(value)) {
+                    errorElement.textContent = 'Please enter a valid email';
+                }
+            } else if (field === 'fburl') {
+                var urlRegex = /^(https:\/\/www\.)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/i;
+                if (!urlRegex.test(value)) {
+                    errorElement.textContent = 'Please enter a valid URL';
+                }
+            } else if (field === 'aadhar') {
+                if (!/^\d{12}$/.test(value)) {
+                    errorElement.textContent = 'Please enter a valid 12-digit Aadhar number';
+                }
+            } else if (field === 'dob') {
+                
+                var currentDate = new Date();
+                var selectedDate = new Date(value);
+                if (selectedDate > currentDate) {
+                    errorElement.textContent = 'Please enter a valid date';
+                }
+            } else if (field === 'pwd') {
+                if (value.trim() === '') {
+                    errorElement.textContent = 'Please enter password';
+                }
+            } else if (field === 'pwd2') {
+                var pass1 = document.getElementById("pwd").value;
+                if (pass1 !== value) {
+                    errorElement.textContent = 'Passwords do not match';
+                }
+            }
+        }
+    </script>
+</body>
+</html>

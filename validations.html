@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+<form>
+<table>
+<tr><td><label>Name: </label></td><td><input type='textfield' id='name' required></td></tr>
+<tr><td><label>Adhaar: </label></td><td><input type='textfield' id='adhaar' maxlength='12' minlength='12' pattern="[0-9]+"></td></tr>
+<tr><td><label>Mobile: </label></td><td><input type='textfield' id='mobile' maxlength='10' minlength='10' pattern="[0-9]+"></td></tr>
+<tr><td><label>DOB: </label></td><td><input type='date' id='dob'></td></tr>
+<tr><td><label>Email: </label></td><td><input type='email' id='email'></td></tr>
+<tr><td><label>FB URL: </label></td><td><input type='textfield' id='fb'></td></tr>
+<tr><td><label>Password: </label></td><td><input type='password' id='password'></td></tr>
+<tr><td><label>Confirm Pass: </label></td><td><input type='password' id='confirmpass'></td></tr>
+</table>
+<button type='submit'>Submit</button>
+</form>
+</body>
+<script>
+var currentDate = new Date().toISOString().split("T")[0];
+document.getElementById("dob").max = currentDate;
+
+var emailInput = document.getElementById("email");
+emailInput.addEventListener("input", function(event) {
+  var email = event.target.value;
+  var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  var isValid = emailRegex.test(email);
+  if (isValid) {
+    emailInput.setCustomValidity("");
+  } else {
+    emailInput.setCustomValidity("Invalid email address");
+  }
+});
+
+var fbInput = document.getElementById("fb");
+fbInput.addEventListener("input", function(event) {
+  var fbUrl = event.target.value;
+  var fbUrlRegex = /^(https?:\/\/)?(www\.)?facebook\.com\/[a-zA-Z0-9(\.\?)?]/;
+  var isValid = fbUrlRegex.test(fbUrl);
+  if (isValid) {
+    fbInput.setCustomValidity("");
+  } else {
+    fbInput.setCustomValidity("Invalid Facebook URL");
+  }
+});
+
+var passwordInput = document.getElementById("password");
+passwordInput.addEventListener("input", function(event) {
+  var password = event.target.value;
+  var passwordRegex = /^(?=.*[A-Z]).{8,}$/;
+  var isValid = passwordRegex.test(password);
+  if (isValid) {
+    passwordInput.setCustomValidity("");
+  } else {
+    passwordInput.setCustomValidity("Password must be at least 8 characters long and contain at least one uppercase letter");
+  }
+});
+
+var passwordInput = document.getElementById("password");
+var confirmPassInput = document.getElementById("confirmpass");
+
+confirmPassInput.addEventListener("input", function(event) {
+  var password = passwordInput.value;
+  var confirmPass = event.target.value;
+
+  if (confirmPass === password) {
+    confirmPassInput.setCustomValidity("");
+  } else {
+    confirmPassInput.setCustomValidity("Passwords do not match");
+  }
+});
+</script>
+
+</html>

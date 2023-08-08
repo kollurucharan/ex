@@ -1,0 +1,45 @@
+<html>
+<head>
+  <title>AJAX POST Call</title>
+</head>
+<body>
+  <p id="para">This is the response tag</p>
+  <form onsubmit="ajaxpostcall()">
+    name:<input type="text" id="name"></br>
+    job:<input type="text" id="job"></br>
+    
+  </form>
+<input type="button" onclick="ajaxpostcall()" value="submit">
+  <script>
+    function ajaxpostcall()
+ {
+ const xhr=new XMLHttpRequest();
+var name=document.getElementById("name").value;
+var job=document.getElementById("job").value;
+ xhr.open("POST","https://reqres.in/api/users",true);
+ const data={"name":name,"job":job};
+	
+ xhr.setRequestHeader("content-type","application/JSON");
+ xhr.addEventListener("readystatechange",function(){
+  if(xhr.status>=200 && xhr.status<300 && xhr.readyState==4)
+  {
+   const res=xhr.responseText;
+   const res1=JSON.parse(xhr.responseText);
+   console.log(res);
+   document.getElementById("para").innerHTML=res;
+            console.log(res1.name);
+   
+         }
+         else
+         {
+          console.log(xhr.status);
+         }
+
+ });
+ xhr.send(JSON.stringify(data));
+
+	
+}
+  </script>
+</body>
+</html>
