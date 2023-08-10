@@ -84,8 +84,20 @@
     };
 
   
-      const jsonString = '[{"id":"bk101","authors":{"author":["Gambardella","Matthew"]},"title":"Developers Guide","price":"650","publish_date":"2000-10-01"},{"id":"bk102","authors":{"author":["Rails","Kim"]},"title":"Midnight Rain","price":"225","publish_date":"2000-12-16"}]';
-    displayTable(jsonString);
+      var jsonString = {"books":[{'book':
+        {"id" : "bk101",
+        "authors":{"author":["Gambardella","Matthew"]},
+        "title":"Developers Guide",
+        "price":"650",
+        "publish_date":"2000-10-01"}},
+        {'book':
+        {"id":"bk102",
+        "authors":{"author":["Rails","Kim"]},
+        "title":"Midnight Rain",
+        "price":"225",
+        "publish_date":"2000-12-16"}
+            }]};
+            displayTable(jsonString);
   </script>
 </body>
 </html>
